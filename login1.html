@@ -1,0 +1,27 @@
+<?php
+include("conn.php");
+if (isset($_POST['submit'])) {
+   $semail=$_POST['semail'];
+   $spassword=md5($_POST['spassword']);
+   $result=mysqli_query($con,"SELECT `id`, `name`, `email`, `number`, `password` FROM `khan` WHERE email='$semail' AND password='$spassword'");
+// data is present in the database
+   if (mysqli_num_rows($result)) {
+    echo "
+    <script>
+    alert('login successfully');
+    window.location.href = 'end.php';
+
+    </script>
+    ";
+   }else {
+    echo "
+    <script>
+    alert('incorrect email/password');
+    window.location.href = 'login.php';
+
+    </script>
+    ";
+   }
+}
+
+?>
